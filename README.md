@@ -1,2 +1,3 @@
-# Redux-Redux-Thunk-demo
-> Setups Redux alongside Redux Thunk and consumes user's profile API
+# ManageIT
+
+> ManageIT is an internal product that allows support team to manage social media platform like facebook in one place
