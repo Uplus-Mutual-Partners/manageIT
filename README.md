@@ -2,7 +2,7 @@
 
 > ManageIT is an internal product that allows support team to manage social media platform like facebook in one place
 
-![Screenshot]()
+![Screenshot](https://github.com/Uplus-Mutual-Partners/manageIT/blob/homepage/images/Screenshot.png)
 
 Additional description of the project and its features.
 
