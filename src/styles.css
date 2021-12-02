@@ -2,3 +2,26 @@
   font-family: sans-serif;
   text-align: center;
 }
+
+.head {
+  margin-left: 150px;
+  margin-top: -9px;
+}
+.logout {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.links {
+  color: white;
+  height: 100%;
+}
+
+.app-bar {
+  background-color: white;
+  color: black;
+}
+
+.navbar {
+  background-color: blueviolet;
+}
