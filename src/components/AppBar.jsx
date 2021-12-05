@@ -19,13 +19,13 @@ export default function ButtonAppBar() {
   function getPath() {
     if (path == "/Posts") {
       setTitle("List of Posts");
-      updateButton("addPost");
+      updateButton("Add Post");
     } else if (path == "/Comments") {
       setTitle("List of Comments");
-      updateButton("addComment");
+      updateButton("Add Comment");
     } else {
       setTitle("List of Users");
-      updateButton("addUser");
+      updateButton("Add User");
     }
   }
 

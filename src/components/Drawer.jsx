@@ -49,7 +49,7 @@ const Drawer = (props) => {
             style={{ color: "white", fontSize: "60px", textAlign: "center" }}
           />
         </Toolbar>
-        <Divider />
+
         <List className="links navbar">
           {itemsList.map((item, index) => {
             const { text, icon, onClick } = item;
@@ -62,7 +62,7 @@ const Drawer = (props) => {
             );
           })}
         </List>
-        <Divider />
+
         <Toolbar className="logout navbar">
           <ExitToAppIcon />
           <h4 style={{ color: "white" }}>Logout</h4>
