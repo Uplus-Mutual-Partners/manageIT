@@ -75,7 +75,7 @@ const Drawer = (props) => {
 
         <Toolbar className="logout navbar">
           <ExitToAppIcon style={{ color: "#736969" }} />
-          <h4 style={{ color: "white" }}>Logout</h4>
+          <h4 style={{ color: "white" }}>Log out</h4>
         </Toolbar>
       </>
     </MUIDrawer>
