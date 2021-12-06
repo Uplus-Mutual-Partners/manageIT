@@ -12,6 +12,7 @@ import Drawer from "./components/Drawer";
 import { makeStyles } from "@material-ui/core/styles";
 import ButtonAppBar from "./components/AppBar";
 import Toolbar from "@mui/material/Toolbar";
+import { Divider } from "@mui/material";
 const useStyles = makeStyles({
   container: {
     display: "flex",

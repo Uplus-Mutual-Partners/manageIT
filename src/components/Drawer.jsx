@@ -19,6 +19,9 @@ const useStyles = makeStyles({
   drawer: {
     width: "180px",
   },
+  dividerLogo: {
+    color: "yellow",
+  },
 });
 
 const Drawer = (props) => {
@@ -46,7 +49,14 @@ const Drawer = (props) => {
       <>
         <Toolbar className="navbar">
           <Brightness5Icon
-            style={{ color: "white", fontSize: "60px", textAlign: "center" }}
+            style={{
+              color: "white",
+              fontSize: "60px",
+              textAlign: "center",
+              width: "130px",
+              paddingBottom: "5px",
+              borderBottom: "#AE5A5A 6px solid",
+            }}
           />
         </Toolbar>
 
@@ -64,7 +74,7 @@ const Drawer = (props) => {
         </List>
 
         <Toolbar className="logout navbar">
-          <ExitToAppIcon />
+          <ExitToAppIcon style={{ color: "#736969" }} />
           <h4 style={{ color: "white" }}>Logout</h4>
         </Toolbar>
       </>

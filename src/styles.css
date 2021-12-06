@@ -22,5 +22,13 @@
 }
 
 .navbar {
-  background-color: blueviolet;
+  background-color: #3b13ad;
+}
+
+.add-btn {
+  color: #6343be;
+}
+
+.divider-logo {
+  color: #ae5a5a;
 }

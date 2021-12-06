@@ -36,7 +36,12 @@ export default function ButtonAppBar() {
           <Typography variant="h3" sx={{ flexGrow: 1 }}>
             {title}
           </Typography>
-          <Button variant="contained" color="primary" className="add-btn">
+          <Button
+            variant="contained"
+            size="small"
+            style={{ borderRadius: "10px" }}
+            className="add-btn"
+          >
             {addButton}
           </Button>
         </Toolbar>
