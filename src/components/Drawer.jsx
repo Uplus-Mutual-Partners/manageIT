@@ -35,12 +35,12 @@ const Drawer = (props) => {
     },
     {
       text: "Posts",
-      icon: <MessageIcon />,
+      icon: <EmailIcon />,
       onClick: () => history.push("/Posts"),
     },
     {
       text: "Comments",
-      icon: <EmailIcon />,
+      icon: <MessageIcon />,
       onClick: () => history.push("/Comments"),
     },
   ];

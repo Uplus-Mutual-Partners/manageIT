@@ -31,14 +31,13 @@ export default function ButtonAppBar() {
 
   return (
     <Box>
-      <AppBar position="static">
+      <AppBar position="static" style={{ boxShadow: "none" }}>
         <Toolbar className="app-bar">
-          <Typography variant="h3" sx={{ flexGrow: 1 }}>
-            {title}
+          <Typography variant="h5" sx={{ flexGrow: 1 }}>
+            <h3>{title}</h3>
           </Typography>
           <Button
             variant="contained"
-            size="small"
             style={{ borderRadius: "10px" }}
             className="add-btn"
           >
