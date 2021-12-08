@@ -1,9 +1,10 @@
 import React from "react";
+import UserTable from "./tables/Users";
 
 const Users = () => {
   return (
     <>
-      <h1 className="table-title">This is the users page</h1>
+      <UserTable />
     </>
   );
 };
