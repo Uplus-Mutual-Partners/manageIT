@@ -1,8 +1,6 @@
 const state = {
-  auth: {
-    viewUsers: {
-      viewProfileInfo: {},
-    },
+  users: {
+    userInfo: {},
   },
 };
 
