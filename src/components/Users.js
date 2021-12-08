@@ -3,9 +3,7 @@ import UserTable from "./tables/users";
 const Users = () => {
   return (
     <>
-      <div>
-        <UserTable />
-      </div>
+      <UserTable />
     </>
   );
 };
