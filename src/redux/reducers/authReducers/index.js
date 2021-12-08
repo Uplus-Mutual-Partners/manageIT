@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import viewProfileReducer from "./viewProfileReducer";
+import viewUsersReducer from "./viewUserReducer";
 
 export default combineReducers({
-  viewProfile: viewProfileReducer
+  viewUsersReducer,
 });

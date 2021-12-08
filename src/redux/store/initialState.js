@@ -1,10 +1,9 @@
 const state = {
   auth: {
-     viewProfile: {
-       viewProfileError: {},
-       viewProfileSuccess: {},
-     }
-  }
-}
+    viewUsers: {
+      viewProfileInfo: {},
+    },
+  },
+};
 
 export default state;

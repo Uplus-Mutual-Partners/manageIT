@@ -11,6 +11,7 @@ export const viewUsersProfileAction = () => async (dispatch) => {
     const viewUsersInfoResponse = await apiCall.post("/users", body, {
       headers: {
         "Content-Type": "application/json",
+        "x-auth-token": " ",
       },
     });
     dispatch({
@@ -24,7 +25,7 @@ export const viewUsersProfileAction = () => async (dispatch) => {
   } catch (error) {
     //console.log('__________________ERROR_____', error);
     dispatch({
-      type: VIEW_PROFILE_ERROR,
+      type: VIEW_USERS_INFO,
       payload: error.response,
     });
   }

@@ -1,14 +1,14 @@
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
-import rootReducer from "../reducers";
-import initialState from "./initialState";
+import logger from "redux-logger";
+import viewUsersReducer from "../reducers/authReducers/viewUserReducer";
 
-const middleware = applyMiddleware(thunk);
+const middleware = applyMiddleware(logger, thunk);
 
 const store = createStore(
-  rootReducer,
-  initialState,
+  viewUsersReducer,
+
   composeWithDevTools(middleware)
 );
 

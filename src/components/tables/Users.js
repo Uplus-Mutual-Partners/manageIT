@@ -13,6 +13,9 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { viewUsersProfileAction } from "../../redux/actions/authActions";
 
 function createData(name, calories, fat, carbs, protein, price) {
   return {
@@ -127,6 +130,8 @@ const rows = [
 ];
 
 export default function UserTable() {
+  const users = useSelector((state) => state.viewUsersReducer);
+  console.log(users);
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
