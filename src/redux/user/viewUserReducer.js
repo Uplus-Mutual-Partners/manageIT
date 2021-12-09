@@ -1,8 +1,10 @@
-import { VIEW_USERS } from "../../actionTypes/userActionTypes";
+import { VIEW_USERS } from "./userTypes";
 
-import initialUserState from "../../store/initialState";
+const initialState = {
+  userInfo: {},
+};
 
-const viewUsersReducer = (state = initialUserState, action) => {
+const viewUsersReducer = (state = initialState, action) => {
   switch (action.type) {
     case VIEW_USERS:
       return {

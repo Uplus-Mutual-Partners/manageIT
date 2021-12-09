@@ -3,8 +3,8 @@ import "./styles.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import { Provider } from "react-redux";
-import store from "./redux/store";
-import Users from "./components/users/Users";
+import store from "./redux/store.js";
+import Users from "./components/Users";
 import Posts from "./components/Posts";
 import Comments from "./components/Comments";
 import Drawer from "./components/Drawer";
