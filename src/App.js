@@ -4,15 +4,13 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import Users from "./components/Users";
+import Users from "./components/users/Users";
 import Posts from "./components/Posts";
 import Comments from "./components/Comments";
-import Box from "@mui/material/Box";
 import Drawer from "./components/Drawer";
 import { makeStyles } from "@material-ui/core/styles";
 import ButtonAppBar from "./components/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import { Divider } from "@mui/material";
+
 const useStyles = makeStyles({
   container: {
     display: "flex",

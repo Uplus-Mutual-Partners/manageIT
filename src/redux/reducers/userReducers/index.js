@@ -1,6 +1,1 @@
-import { combineReducers } from "redux";
-import viewUsersReducer from "./viewUserReducer";
-
-export default combineReducers({
-  viewUsersReducer,
-});
+export { viewUsersAction } from "../../actions/userActions";

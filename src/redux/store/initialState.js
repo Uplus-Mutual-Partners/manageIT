@@ -1,7 +1,5 @@
-const state = {
-  users: {
-    userInfo: {},
-  },
+const initialUserState = {
+  userInfo: {},
 };
 
-export default state;
+export default initialUserState;
