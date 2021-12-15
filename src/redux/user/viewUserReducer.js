@@ -1,7 +1,7 @@
 import { VIEW_USERS } from "./userTypes";
 
 const initialState = {
-  userInfo: {},
+  userInfo: [],
 };
 
 const viewUsersReducer = (state = initialState, action) => {

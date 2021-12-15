@@ -14,131 +14,178 @@ import Paper from "@mui/material/Paper";
 import { viewUsersAction } from "../redux";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import CircularProgress from "@mui/material/CircularProgress";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import BasicPopover from "./Popup";
+
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-function createData(name, calories, fat, carbs, protein, price) {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    price,
-    history: [
-      {
-        date: "2020-01-05",
-        customerId: "11091700",
-        amount: 3,
-      },
-      {
-        date: "2020-01-02",
-        customerId: "Anonymous",
-        amount: 1,
-      },
-    ],
-  };
-}
-
-function Row(props) {
-  const { row } = props;
-  const [open, setOpen] = React.useState(false);
-
-  return (
-    <React.Fragment>
-      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-        <TableCell>
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </TableCell>
-        <TableCell component="th" scope="row">
-          {row.name}
-        </TableCell>
-        <TableCell align="right">{row.calories}</TableCell>
-        <TableCell align="right">{row.fat}</TableCell>
-        <TableCell align="right">{row.carbs}</TableCell>
-        <TableCell align="right">{row.protein}</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              <Typography variant="h6" gutterBottom component="div">
-                History
-              </Typography>
-              <Table size="small" aria-label="purchases">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Customer</TableCell>
-                    <TableCell align="right">Amount</TableCell>
-                    <TableCell align="right">Total price ($)</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
-                      <TableCell component="th" scope="row">
-                        {historyRow.date}
-                      </TableCell>
-                      <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align="right">{historyRow.amount}</TableCell>
-                      <TableCell align="right">
-                        {Math.round(historyRow.amount * row.price * 100) / 100}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Box>
-          </Collapse>
-        </TableCell>
-      </TableRow>
-    </React.Fragment>
-  );
-}
-
-Row.propTypes = {
-  row: PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbs: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    history: PropTypes.arrayOf(
-      PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired,
-  }).isRequired,
-};
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0, 3.99),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3, 4.99),
-  createData("Eclair", 262, 16.0, 24, 6.0, 3.79),
-  createData("Cupcake", 305, 3.7, 67, 4.3, 2.5),
-  createData("Gingerbread", 356, 16.0, 49, 3.9, 1.5),
-];
-
-export default function UserTable() {
+const Users = () => {
   const users = useSelector((state) => state.user.userInfo);
-  console.log(users);
+  let rows = [];
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log("_______________Users from useEffect________", users);
     if (!users.length) {
       dispatch(viewUsersAction());
     }
   }, []);
 
+  const Row = (props) => {
+    const { row } = props;
+    const [open, setOpen] = React.useState(false);
+    const [open2, setOpen2] = React.useState(false);
+
+    return (
+      <React.Fragment>
+        <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+          <TableCell>
+            <IconButton
+              aria-label="expand row"
+              size="small"
+              onClick={() => setOpen(!open)}
+            >
+              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </IconButton>
+          </TableCell>
+          <TableCell component="th" scope="row">
+            {row?.name}
+          </TableCell>
+          <TableCell align="left">{row?.username}</TableCell>
+          <TableCell align="left">{row?.email}</TableCell>
+          <TableCell align="left">{row?.website}</TableCell>
+          <TableCell align="left">
+            <EditIcon />
+            <DeleteIcon />
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <Box sx={{ margin: 1 }}>
+                <Typography variant="h6" gutterBottom component="div">
+                  Address
+                </Typography>
+                <Table size="small" aria-label="purchases">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>street</TableCell>
+                      <TableCell>suite</TableCell>
+                      <TableCell>city</TableCell>
+                      <TableCell>zip code</TableCell>
+                      <TableCell>phone</TableCell>
+                      <TableCell>company</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {row?.address.map((addressRow) => (
+                      <TableRow key={addressRow.street}>
+                        <TableCell>
+                          <IconButton
+                            aria-label="expand row"
+                            size="small"
+                            onClick={() => setOpen2(!open2)}
+                          >
+                            {open2 ? (
+                              <KeyboardArrowUpIcon />
+                            ) : (
+                              <KeyboardArrowDownIcon />
+                            )}
+                          </IconButton>
+                        </TableCell>
+                        <TableCell align="left">{addressRow.street}</TableCell>
+                        <TableCell component="th" scope="row">
+                          {addressRow.suite}
+                        </TableCell>
+                        <TableCell>{addressRow.city}</TableCell>
+                        <TableCell align="left">{addressRow.zipcode}</TableCell>
+                        <TableCell align="left">{addressRow.phone}</TableCell>
+
+                        <TableCell align="left">
+                          <BasicPopover row={users} rowId={addressRow} />
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                    <TableRow>
+                      <TableCell
+                        style={{ paddingBottom: 0, paddingTop: 0 }}
+                        colSpan={6}
+                      >
+                        <Collapse in={open} timeout="auto" unmountOnExit>
+                          <Box sx={{ margin: 1 }}>
+                            <Typography
+                              variant="h6"
+                              gutterBottom
+                              component="div"
+                            >
+                              Geo
+                            </Typography>
+                            <Table size="small" aria-label="purchases">
+                              <TableHead>
+                                <TableRow>
+                                  <TableCell>Lat</TableCell>
+                                  <TableCell>lng</TableCell>
+                                </TableRow>
+                              </TableHead>
+                              <TableBody>
+                                {row?.address.map((geo) => {
+                                  return (
+                                    <>
+                                      <TableRow key={geo.geo.lat}>
+                                        <TableCell align="left">
+                                          {geo.geo.lat}
+                                        </TableCell>
+                                        <TableCell align="left">
+                                          {geo.geo.lng}
+                                        </TableCell>
+                                      </TableRow>
+                                    </>
+                                  );
+                                })}
+                              </TableBody>
+                            </Table>
+                          </Box>
+                        </Collapse>
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </Box>
+            </Collapse>
+          </TableCell>
+        </TableRow>
+      </React.Fragment>
+    );
+  };
+
+  if (users && users.length !== 0) {
+    rows = users.map((user) => {
+      return {
+        name: user.name,
+        username: user.username,
+        email: user.email,
+        website: user.website,
+
+        address: [
+          {
+            street: user.address.street,
+            suite: user.address.suite,
+            city: user.address.city,
+            zipcode: user.address.zipcode,
+            phone: user.phone,
+            geo: {
+              lat: user.address.geo.lat,
+              lng: user.address.geo.lng,
+            },
+          },
+        ],
+      };
+    });
+  }
+  console.log("===================users rows======================", rows);
+  console.log("===================users array======================", users);
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -146,18 +193,24 @@ export default function UserTable() {
           <TableRow>
             <TableCell />
             <TableCell>Names</TableCell>
-            <TableCell align="right">Username</TableCell>
-            <TableCell align="right">Email</TableCell>
-            <TableCell align="right">Website</TableCell>
-            <TableCell align="right">Actions</TableCell>
+            <TableCell align="left">Username</TableCell>
+            <TableCell align="left">Email</TableCell>
+            <TableCell align="left">Website</TableCell>
+            <TableCell align="left">Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <Row key={row.name} row={row} />
-          ))}
+          {rows && rows.length === 0 ? (
+            <Box sx={{ display: "flex" }}>
+              <CircularProgress />
+            </Box>
+          ) : (
+            rows.map((row) => <Row key={row?.id} row={row} />)
+          )}
         </TableBody>
       </Table>
     </TableContainer>
   );
-}
+};
+
+export default Users;
