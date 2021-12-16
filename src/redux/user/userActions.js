@@ -10,9 +10,8 @@ export const viewUsersAction = () => async (dispatch) => {
       payload: Response.data,
     });
   } catch (err) {
-    throw new Error("unable to connect");
+    console.log("unable to connect");
   }
-  console.log("_____________RESPONSE_________", Response.data);
 };
 
 // export const viewUsersAction = () => async (dispatch) => {
