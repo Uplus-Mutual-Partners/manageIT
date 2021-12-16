@@ -201,7 +201,13 @@ const Users = () => {
         </TableHead>
         <TableBody>
           {rows && rows.length === 0 ? (
-            <Box sx={{ display: "flex" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                marginLeft: "450px",
+              }}
+            >
               <CircularProgress />
             </Box>
           ) : (

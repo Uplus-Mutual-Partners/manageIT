@@ -39,3 +39,9 @@
   font-weight: bold;
   margin-left: 20px;
 }
+
+.circular-progress {
+  display: flex;
+  justify-content: center;
+  color: yellow;
+}
