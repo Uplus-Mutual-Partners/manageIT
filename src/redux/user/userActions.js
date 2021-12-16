@@ -9,8 +9,8 @@ export const viewUsersAction = () => async (dispatch) => {
       type: VIEW_USERS,
       payload: Response.data,
     });
-  } catch (err) {
-    console.log("unable to connect");
+  } catch (error) {
+    console.log(error.response.data.error);
   }
 };
 
