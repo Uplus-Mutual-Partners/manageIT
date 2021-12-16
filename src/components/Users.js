@@ -20,6 +20,7 @@ import BasicPopover from "./Popup";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MuiAlert from "@mui/material/Alert";
+import CustomizedSnackbars from "./Snack";
 
 const Users = () => {
   const [error, setError] = useState([]);
@@ -35,11 +36,7 @@ const Users = () => {
     if (!users.length) {
       dispatch(viewUsersAction());
       if (!users.length) {
-        setError(
-          <Alert severity="error" sx={{ margin: 15 }}>
-            Data was not fetched from API
-          </Alert>
-        );
+        setError(<CustomizedSnackbars />);
       }
     }
   }, [users]);
