@@ -1,4 +1,4 @@
-import { VIEW_USERS } from "./userTypes";
+import { VIEW_USERS, ERROR_HUNDLING } from "./userTypes";
 
 import apiCall from "../../helpers/apiCall";
 
@@ -10,7 +10,9 @@ export const viewUsersAction = () => async (dispatch) => {
       payload: Response.data,
     });
   } catch (error) {
-    console.log(error.response.data.error);
+    dispatch({
+      type: ERROR_HUNDLING,
+    });
   }
 };
 

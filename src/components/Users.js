@@ -1,4 +1,3 @@
-import * as React from "react";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
@@ -18,21 +17,33 @@ import CircularProgress from "@mui/material/CircularProgress";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BasicPopover from "./Popup";
-
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import MuiAlert from "@mui/material/Alert";
 
 const Users = () => {
+  const [error, setError] = useState([]);
   const users = useSelector((state) => state.user.userInfo);
+
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
   let rows = [];
   const dispatch = useDispatch();
   useEffect(() => {
     console.log("_______________Users from useEffect________", users);
     if (!users.length) {
       dispatch(viewUsersAction());
+      if (!users.length) {
+        setError(
+          <Alert severity="error" sx={{ margin: 15 }}>
+            Data was not fetched from API
+          </Alert>
+        );
+      }
     }
-  }, []);
-
+  }, [users]);
+  console.log("========error is=========", error);
   const Row = (props) => {
     const { row } = props;
     const [open, setOpen] = React.useState(false);
@@ -188,33 +199,37 @@ const Users = () => {
   console.log("===================users array======================", users);
   return (
     <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell>Names</TableCell>
-            <TableCell align="left">Username</TableCell>
-            <TableCell align="left">Email</TableCell>
-            <TableCell align="left">Website</TableCell>
-            <TableCell align="left">Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows && rows.length === 0 ? (
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                marginLeft: "450px",
-              }}
-            >
-              <CircularProgress />
-            </Box>
-          ) : (
-            rows.map((row) => <Row key={row?.id} row={row} />)
-          )}
-        </TableBody>
-      </Table>
+      {error && error.length === 0 ? (
+        <Table aria-label="collapsible table">
+          <TableHead>
+            <TableRow>
+              <TableCell />
+              <TableCell>Names</TableCell>
+              <TableCell align="left">Username</TableCell>
+              <TableCell align="left">Email</TableCell>
+              <TableCell align="left">Website</TableCell>
+              <TableCell align="left">Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows && rows.length === 0 ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginLeft: "450px",
+                }}
+              >
+                <CircularProgress />
+              </Box>
+            ) : (
+              rows.map((row) => <Row key={row?.id} row={row} />)
+            )}
+          </TableBody>
+        </Table>
+      ) : (
+        error
+      )}
     </TableContainer>
   );
 };

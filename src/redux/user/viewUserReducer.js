@@ -1,4 +1,4 @@
-import { VIEW_USERS } from "./userTypes";
+import { VIEW_USERS, ERROR_HUNDLING } from "./userTypes";
 
 const initialState = {
   userInfo: [],
@@ -10,6 +10,11 @@ const viewUsersReducer = (state = initialState, action) => {
       return {
         ...state,
         userInfo: action.payload,
+      };
+    case ERROR_HUNDLING:
+      return {
+        ...state,
+        userInfo: [],
       };
 
     default:
