@@ -47,7 +47,7 @@ const Users = () => {
   useEffect(() => {
     setTimeout(() => {
       setCounter(counter + 1);
-    }, 7000);
+    }, 15000);
   }, 1000);
   console.log("==============counter is=============", counter);
   console.log("========error is=========", error);
