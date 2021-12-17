@@ -9,7 +9,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 export default function CustomizedSnackbars() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
 
   const handleClick = () => {
     setOpen(true);
@@ -25,9 +25,6 @@ export default function CustomizedSnackbars() {
 
   return (
     <Stack spacing={2} sx={{ width: "100%" }}>
-      <Button variant="outlined" onClick={handleClick}>
-        display users info here
-      </Button>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
           Data was not fetched!

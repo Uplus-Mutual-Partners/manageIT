@@ -25,21 +25,31 @@ import CustomizedSnackbars from "./Snack";
 const Users = () => {
   const [error, setError] = useState([]);
   const users = useSelector((state) => state.user.userInfo);
+  const [counter, setCounter] = useState(0);
 
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
   let rows = [];
+
   const dispatch = useDispatch();
   useEffect(() => {
     console.log("_______________Users from useEffect________", users);
     if (!users.length) {
       dispatch(viewUsersAction());
+
       if (!users.length) {
         setError(<CustomizedSnackbars />);
       }
     }
   }, [users]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCounter(counter + 1);
+    }, 7000);
+  }, 1000);
+  console.log("==============counter is=============", counter);
   console.log("========error is=========", error);
   const Row = (props) => {
     const { row } = props;
@@ -196,7 +206,17 @@ const Users = () => {
   console.log("===================users array======================", users);
   return (
     <TableContainer component={Paper}>
-      {error && error.length === 0 ? (
+      {/* {error && error.length === 0 ? ( */}
+      {rows && rows.length === 0 ? (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          {counter && counter != 0 ? error : <CircularProgress />}
+        </Box>
+      ) : (
         <Table aria-label="collapsible table">
           <TableHead>
             <TableRow>
@@ -209,24 +229,15 @@ const Users = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows && rows.length === 0 ? (
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginLeft: "450px",
-                }}
-              >
-                <CircularProgress />
-              </Box>
-            ) : (
-              rows.map((row) => <Row key={row?.id} row={row} />)
-            )}
+            {rows.map((row) => (
+              <Row key={row?.id} row={row} />
+            ))}
           </TableBody>
         </Table>
-      ) : (
-        error
       )}
+      {/* ) : (
+        error
+      )} */}
     </TableContainer>
   );
 };
