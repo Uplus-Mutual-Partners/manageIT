@@ -45,3 +45,12 @@
   justify-content: center;
   color: yellow;
 }
+
+.person {
+  margin-right: 10px;
+  margin-top: -20px;
+}
+
+.name-cell {
+  margin-left: -30px;
+}

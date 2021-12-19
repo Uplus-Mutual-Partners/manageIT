@@ -21,6 +21,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MuiAlert from "@mui/material/Alert";
 import CustomizedSnackbars from "./Snack";
+import PersonIcon from "@mui/icons-material/Person";
 
 const Users = () => {
   const [error, setError] = useState([]);
@@ -68,7 +69,8 @@ const Users = () => {
               {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </IconButton>
           </TableCell>
-          <TableCell component="th" scope="row">
+          <TableCell component="th" scope="row" className="name-cell">
+            <PersonIcon className="person" />
             {row?.name}
           </TableCell>
           <TableCell align="left">{row?.username}</TableCell>
