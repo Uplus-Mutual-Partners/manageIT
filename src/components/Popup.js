@@ -12,7 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 const BasicTable = (props) => {
-  const { row, rowId } = props;
+  const { row } = props;
   console.log("..............output.......", row);
   return (
     <TableContainer component={Paper}>
@@ -28,20 +28,18 @@ const BasicTable = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {row.map((user) => {
-            if (user.address.street === rowId) {
-              <TableRow
-                key={user.address.street}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {user.company.name}
-                </TableCell>
-                <TableCell align="right">{user.company.catchPhrase}</TableCell>
-                <TableCell align="right">{user.company.bs}</TableCell>
-              </TableRow>;
-            }
-          })}
+          {
+            <TableRow
+              key={row.company.name}
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {row.company.name}
+              </TableCell>
+              <TableCell align="right">{row.company.catchPhrase}</TableCell>
+              <TableCell align="right">{row.company.bs}</TableCell>
+            </TableRow>
+          }
         </TableBody>
       </Table>
     </TableContainer>
@@ -49,9 +47,9 @@ const BasicTable = (props) => {
 };
 
 const BasicPopover = (props) => {
-  const { row, rowId } = props;
+  const { row } = props;
   console.log("--------users info in Popup-------", row);
-  console.log("--------users info in Popup-------", rowId.street);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -81,7 +79,7 @@ const BasicPopover = (props) => {
         }}
       >
         <Typography sx={{ p: 2 }}>
-          <BasicTable row={row} rowId={rowId.street} />
+          <BasicTable row={row} />
         </Typography>
       </Popover>
     </div>

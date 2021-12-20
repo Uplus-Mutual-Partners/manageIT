@@ -54,3 +54,7 @@
 .name-cell {
   margin-left: -30px;
 }
+
+.title-row {
+  border-bottom: 2px solid gray;
+}

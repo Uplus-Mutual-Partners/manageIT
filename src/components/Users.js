@@ -4,7 +4,7 @@ import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
@@ -23,6 +23,7 @@ import MuiAlert from "@mui/material/Alert";
 import CustomizedSnackbars from "./Snack";
 import PersonIcon from "@mui/icons-material/Person";
 
+import Divider from "@mui/material/Divider";
 const Users = () => {
   const [error, setError] = useState([]);
   const users = useSelector((state) => state.user.userInfo);
@@ -49,7 +50,7 @@ const Users = () => {
     setTimeout(() => {
       setCounter(counter + 1);
     }, 15000);
-  }, 1000);
+  }, [1000]);
   console.log("==============counter is=============", counter);
   console.log("========error is=========", error);
   const Row = (props) => {
@@ -65,6 +66,7 @@ const Users = () => {
               aria-label="expand row"
               size="small"
               onClick={() => setOpen(!open)}
+              style={{ color: "black", marginRight: "-50px" }}
             >
               {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </IconButton>
@@ -74,13 +76,16 @@ const Users = () => {
             {row?.name}
           </TableCell>
           <TableCell align="left">{row?.username}</TableCell>
+
           <TableCell align="left">{row?.email}</TableCell>
+
           <TableCell align="left">{row?.website}</TableCell>
-          <TableCell align="left">
+          <TableCell align="left" sx={{ color: "gray" }}>
             <EditIcon />
             <DeleteIcon />
           </TableCell>
         </TableRow>
+
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={open} timeout="auto" unmountOnExit>
@@ -102,11 +107,12 @@ const Users = () => {
                   <TableBody>
                     {row?.address.map((addressRow) => (
                       <TableRow key={addressRow.street}>
-                        <TableCell>
+                        <TableCell sx={{ color: "black" }}>
                           <IconButton
                             aria-label="expand row"
                             size="small"
                             onClick={() => setOpen2(!open2)}
+                            style={{ color: "black" }}
                           >
                             {open2 ? (
                               <KeyboardArrowUpIcon />
@@ -124,7 +130,7 @@ const Users = () => {
                         <TableCell align="left">{addressRow.phone}</TableCell>
 
                         <TableCell align="left">
-                          <BasicPopover row={users} rowId={addressRow} />
+                          <BasicPopover row={row} />
                         </TableCell>
                       </TableRow>
                     ))}
@@ -187,6 +193,11 @@ const Users = () => {
         username: user.username,
         email: user.email,
         website: user.website,
+        company: {
+          name: user.company.name,
+          catchPhrase: user.company.catchPhrase,
+          bs: user.company.bs,
+        },
 
         address: [
           {
@@ -219,17 +230,34 @@ const Users = () => {
           {counter && counter != 0 ? error : <CircularProgress />}
         </Box>
       ) : (
-        <Table aria-label="collapsible table">
+        <Table
+          aria-label="collapsible table"
+          sx={{
+            [`& .${tableCellClasses.root}`]: {
+              borderBottom: "none",
+            },
+          }}
+        >
           <TableHead>
-            <TableRow>
+            <TableRow className="title-row">
               <TableCell />
-              <TableCell>Names</TableCell>
-              <TableCell align="left">Username</TableCell>
-              <TableCell align="left">Email</TableCell>
-              <TableCell align="left">Website</TableCell>
-              <TableCell align="left">Actions</TableCell>
+              <TableCell sx={{ color: "gray" }}>Names</TableCell>
+              <TableCell align="left" sx={{ color: "gray" }}>
+                Username
+              </TableCell>
+              <TableCell align="left" sx={{ color: "gray" }}>
+                Email
+              </TableCell>
+
+              <TableCell align="left" sx={{ color: "gray" }}>
+                Website
+              </TableCell>
+              <TableCell align="left" sx={{ color: "gray" }}>
+                Actions
+              </TableCell>
             </TableRow>
           </TableHead>
+
           <TableBody>
             {rows.map((row) => (
               <Row key={row?.id} row={row} />
@@ -237,9 +265,6 @@ const Users = () => {
           </TableBody>
         </Table>
       )}
-      {/* ) : (
-        error
-      )} */}
     </TableContainer>
   );
 };
