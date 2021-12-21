@@ -28,7 +28,7 @@ const Users = () => {
   const [error, setError] = useState([]);
   const users = useSelector((state) => state.user.userInfo);
   const [counter, setCounter] = useState(0);
-
+  console.log("_______________UserInformation________", users);
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
@@ -54,13 +54,13 @@ const Users = () => {
   console.log("==============counter is=============", counter);
   console.log("========error is=========", error);
   const Row = (props) => {
-    const { row } = props;
+    const { id, row } = props;
     const [open, setOpen] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
 
     return (
       <React.Fragment>
-        <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+        <TableRow key={id} sx={{ "& > *": { borderBottom: "unset" } }}>
           <TableCell>
             <IconButton
               aria-label="expand row"
@@ -89,7 +89,7 @@ const Users = () => {
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={open} timeout="auto" unmountOnExit>
-              <Box sx={{ margin: 1 }}>
+              <Box sx={{ margin: 1 }} color="primary">
                 <Typography variant="h6" gutterBottom component="div">
                   Address
                 </Typography>
@@ -106,7 +106,7 @@ const Users = () => {
                   </TableHead>
                   <TableBody>
                     {row?.address.map((addressRow) => (
-                      <TableRow key={addressRow.street}>
+                      <TableRow key={id}>
                         <TableCell sx={{ color: "black" }}>
                           <IconButton
                             aria-label="expand row"
@@ -159,7 +159,7 @@ const Users = () => {
                                 {row?.address.map((geo) => {
                                   return (
                                     <>
-                                      <TableRow key={geo.geo.lat}>
+                                      <TableRow key={id}>
                                         <TableCell align="left">
                                           {geo.geo.lat}
                                         </TableCell>
@@ -189,6 +189,7 @@ const Users = () => {
   if (users && users.length !== 0) {
     rows = users.map((user) => {
       return {
+        id: user.id,
         name: user.name,
         username: user.username,
         email: user.email,
@@ -259,9 +260,14 @@ const Users = () => {
           </TableHead>
 
           <TableBody>
-            {rows.map((row) => (
+            {/* {rows.map((row) => (
               <Row key={row?.id} row={row} />
-            ))}
+            ))} */}
+
+            {rows.map((row) => {
+              console.log("ROW", row);
+              return <Row id={row?.id} row={row} />;
+            })}
           </TableBody>
         </Table>
       )}

@@ -1,4 +1,4 @@
-import { VIEW_USERS, ERROR_HUNDLING } from "./userTypes";
+import { VIEW_USERS, ERROR_HUNDLING, DELETE_USER } from "./userTypes";
 
 import apiCall from "../../helpers/apiCall";
 
@@ -16,11 +16,9 @@ export const viewUsersAction = () => async (dispatch) => {
   }
 };
 
-// export const viewUsersAction = () => async (dispatch) => {
-//   await fetch("https://jsonplaceholder.typicode.com/users").then((res) =>
-//     dispatch({
-//       type: VIEW_USERS,
-//       payload: res,
-//     })
-//   );
-// };
+export const deleteUser = (id) => {
+  return {
+    type: DELETE_USER,
+    payload: id,
+  };
+};

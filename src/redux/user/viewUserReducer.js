@@ -1,4 +1,4 @@
-import { VIEW_USERS, ERROR_HUNDLING } from "./userTypes";
+import { VIEW_USERS, ERROR_HUNDLING, DELETE_USER } from "./userTypes";
 
 const initialState = {
   userInfo: [],
@@ -19,6 +19,15 @@ const viewUsersReducer = (state = initialState, action) => {
 
     default:
       return state;
+  }
+};
+
+const deleteUserReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case DELETE_USER:
+      return {
+        ...state,
+      };
   }
 };
 
