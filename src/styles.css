@@ -39,3 +39,22 @@
   font-weight: bold;
   margin-left: 20px;
 }
+
+.circular-progress {
+  display: flex;
+  justify-content: center;
+  color: yellow;
+}
+
+.person {
+  margin-right: 10px;
+  margin-top: -20px;
+}
+
+.name-cell {
+  margin-left: -30px;
+}
+
+.title-row {
+  border-bottom: 2px solid gray;
+}
