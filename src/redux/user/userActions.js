@@ -16,18 +16,21 @@ export const viewUsersAction = () => async (dispatch) => {
   }
 };
 
-export const addUserAction = (formData) => async (dispatch) => {
-  try {
-    const Response = await apiCall.post("/users");
-    dispatch({
-      type: ADD_USER,
-      payload: formData,
-    });
-  } catch (error) {
-    dispatch({
-      type: ERROR_HUNDLING,
-    });
-  }
+export const addUserAction = (formData) => {
+  return (dispatch) => {
+    apiCall
+      .post("/users", { formData })
+      .then((res) => {
+        console.log("201: user created", res);
+        dispatch({
+          type: "ADD_USER",
+          payload: res.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 };
 
 export const deleteUser = (id) => {

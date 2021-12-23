@@ -12,22 +12,13 @@ const viewUsersReducer = (state = initialState, action) => {
         userInfo: action.payload,
       };
     case ADD_USER:
-      // return state.concat({
-      //   username: action.payload.username,
-      //   street: action.payload.street,
-      //   suite: action.payload.suite,
-      //   city: action.payload.city,
-      //   zipcode: action.payload.zipcode,
-      //   lat: action.payload.lat,
-      //   lng: action.payload.lng,
-      // });
-
-      return { ...state, userInfo: { ...state.userInfo, ...action.payload } };
+      const users = state.userInfo.concat(action.payload);
+      return { ...state, users };
 
     case ERROR_HUNDLING:
       return {
         ...state,
-        userInfo: [],
+        userInfo: {},
       };
 
     default:
