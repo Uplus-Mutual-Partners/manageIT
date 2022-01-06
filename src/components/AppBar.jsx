@@ -42,36 +42,41 @@ export default function ButtonAppBar() {
     }
   }
 
-  const initialList = [
-    {
-      name: "",
-      surname: "",
-      street: "",
-      suite: "",
-      city: "",
-      zipcode: "",
-      lat: "",
-      lng: "",
-    },
-  ];
-
+  
   const [open, setOpen] = useState(false);
-  const [value, setValue] = React.useState("");
-  const [list, setList] = React.useState(initialList);
+
+  const [state, setState] = React.useState({
+    name: "",
+    username: "",
+    street: "",
+    suite: "",
+    city: "",
+    zipcode: "",
+    lat: "",
+    lng: "",
+  });
 
   const handleChange = (event) => {
-    setValue((list[event.target.id] = event.target.value));
-    console.log(list);
+    const { id, value} = event.target;
+    setState(prevState => ({
+      ...prevState,
+      [id]: value
+    }));
+    
   };
 
   const handleSubmit = (event) => {
-    if (value) {
-      setList(list.concat(value));
-    }
-    dispatch(addUserAction(list));
-    setValue("");
-
     event.preventDefault();
+    console.log("list==========================",state);
+    dispatch(addUserAction(state));
+    const { id, value} = event.target;
+    setState(prevState => ({
+      ...prevState,
+      [id]: "",
+    }));
+    
+
+    
   };
 
   const hundleClickOpen = () => {
@@ -107,7 +112,7 @@ export default function ButtonAppBar() {
               <label for="name">Name:</label>
 
               <TextField
-                value={list.name}
+                
                 onChange={handleChange}
                 authoFocus
                 id="name"
@@ -118,7 +123,7 @@ export default function ButtonAppBar() {
               <label for="username">Username:</label>
 
               <TextField
-                value={list.username}
+                
                 onChange={handleChange}
                 authoFocus
                 id="username"
@@ -130,7 +135,7 @@ export default function ButtonAppBar() {
               <label for="street">Steet:</label>
 
               <TextField
-                value={list.street}
+                
                 onChange={handleChange}
                 authoFocus
                 id="street"
@@ -141,7 +146,7 @@ export default function ButtonAppBar() {
               <label for="suite">Suite:</label>
 
               <TextField
-                value={list.suite}
+              
                 onChange={handleChange}
                 authoFocus
                 id="suite"
@@ -152,7 +157,7 @@ export default function ButtonAppBar() {
               <label for="city">city:</label>
 
               <TextField
-                value={list.city}
+               
                 onChange={handleChange}
                 authoFocus
                 id="city"
@@ -163,7 +168,7 @@ export default function ButtonAppBar() {
               <label for="zipcode">zipcode</label>
 
               <TextField
-                value={list.zipcode}
+         
                 onChange={handleChange}
                 authoFocus
                 id="zipcode"
@@ -174,7 +179,7 @@ export default function ButtonAppBar() {
               <label for="lat">Lat:</label>
 
               <TextField
-                value={list.lat}
+              
                 onChange={handleChange}
                 authoFocus
                 id="lat"
@@ -185,7 +190,7 @@ export default function ButtonAppBar() {
               <label for="lng">Lng:</label>
 
               <TextField
-                value={list.lng}
+               
                 onChange={handleChange}
                 authoFocus
                 id="lng"
