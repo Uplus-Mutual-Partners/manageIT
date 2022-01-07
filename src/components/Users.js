@@ -82,8 +82,8 @@ const Users = () => {
           <TableCell align="left">{row?.website}</TableCell>
           <TableCell align="left" sx={{ color: "gray" }}>
             <EditIcon />
-            <DeleteIcon />
-          </TableCell>
+            <DeleteIcon onClick={()=>alert("User deleted")}/>
+          </TableCell >
         </TableRow>
 
         <TableRow>
