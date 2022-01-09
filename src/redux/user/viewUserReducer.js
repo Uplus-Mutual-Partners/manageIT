@@ -30,7 +30,7 @@ const deleteUserReducer = (state = initialState, action) => {
   switch (action.type) {
     case DELETE_USER:
       return {
-        ...state,
+        ...state, userInfo: state.userInfo.splice(action.payload, 1)
       };
   }
 };
