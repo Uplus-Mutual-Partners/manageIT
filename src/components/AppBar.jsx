@@ -17,8 +17,9 @@ import { Input, FormControl } from "@mui/material";
 import { addUserAction } from "../redux/user/userActions";
 import { useSelector, useDispatch } from "react-redux";
 
+
 export default function ButtonAppBar() {
-  const users = useSelector((state) => state.user.userInfo);
+  const users = useSelector((state) => state.users.userInfo);
   const dispatch = useDispatch();
   let Location = useLocation();
   const [title, setTitle] = useState("");
@@ -42,6 +43,17 @@ export default function ButtonAppBar() {
     }
   }
 
+  const styles = theme => ({
+    textField: {
+        width: '90%',
+        marginLeft: 100,
+        marginLeft: 'auto',            
+        paddingBottom: 0,
+        marginTop: 0,
+        fontWeight: 500
+    },
+   
+});
   
   const [open, setOpen] = useState(false);
 
@@ -108,7 +120,7 @@ export default function ButtonAppBar() {
         </DialogTitle>
         <DialogContent>
           <form onSubmit={handleSubmit}>
-            <FormControl>
+            <FormControl className="formButtons">
               <label for="name">Name:</label>
 
               <TextField
@@ -117,10 +129,10 @@ export default function ButtonAppBar() {
                 authoFocus
                 id="name"
               />
-            </FormControl>
-            <br />
-            <FormControl>
-              <label for="username">Username:</label>
+            </FormControl >
+           
+            <FormControl  sx={{ marginLeft: 3}}>
+              <label for="username" >Username:</label>
 
               <TextField
                 
@@ -141,8 +153,8 @@ export default function ButtonAppBar() {
                 id="street"
               />
             </FormControl>
-            <br />
-            <FormControl>
+            
+            <FormControl sx={{ marginLeft: 3}}>
               <label for="suite">Suite:</label>
 
               <TextField
@@ -163,8 +175,8 @@ export default function ButtonAppBar() {
                 id="city"
               />
             </FormControl>
-            <br />
-            <FormControl>
+           
+            <FormControl sx={{ marginLeft: 3}}>
               <label for="zipcode">zipcode</label>
 
               <TextField
@@ -185,8 +197,8 @@ export default function ButtonAppBar() {
                 id="lat"
               />
             </FormControl>
-            <br />
-            <FormControl>
+            
+            <FormControl sx={{ marginLeft: 3}}>
               <label for="lng">Lng:</label>
 
               <TextField
