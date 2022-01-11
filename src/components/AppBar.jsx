@@ -70,7 +70,7 @@ export default function ButtonAppBar() {
 
   const handleChange = (event) => {
     const { id, value} = event.target;
-    setState(prevState => ({
+    setState((prevState) => ({
       ...prevState,
       [id]: value
     }));
@@ -81,11 +81,11 @@ export default function ButtonAppBar() {
     event.preventDefault();
     console.log("list==========================",state);
     dispatch(addUserAction(state));
-    const { id, value} = event.target;
-    setState(prevState => ({
-      ...prevState,
-      [id]: "",
-    }));
+    // const { id, value} = event.target;
+    // setState(prevState => ({
+    //   ...prevState,
+    //   [id]: "",
+    // }));
     
 
     
@@ -144,7 +144,7 @@ export default function ButtonAppBar() {
             <br />
 
             <FormControl>
-              <label for="street">Steet:</label>
+              <label for="street">Street:</label>
 
               <TextField
                 
