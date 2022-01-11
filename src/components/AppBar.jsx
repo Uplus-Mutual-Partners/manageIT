@@ -16,10 +16,14 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Input, FormControl } from "@mui/material";
 import { addUserAction } from "../redux/user/userActions";
 import { useSelector, useDispatch } from "react-redux";
+import CircularProgress from "@mui/material/CircularProgress";
 
 
 export default function ButtonAppBar() {
   const users = useSelector((state) => state.users.userInfo);
+  const newUser = useSelector((state) => state.new.user);
+  const [submitBtn, changeSubmitBtn] = useState("Submit");
+  const [warning, changeWarning] = useState("");
   const dispatch = useDispatch();
   let Location = useLocation();
   const [title, setTitle] = useState("");
@@ -99,6 +103,23 @@ export default function ButtonAppBar() {
     setOpen(false);
   };
 
+  const hundleSubmitBtn = () => {
+   
+    newUser && newUser.length === 0 ? changeSubmitBtn(<CircularProgress />) : changeSubmitBtn("Submit");
+
+  };
+
+  useEffect(()=> {
+    if (newUser) 
+     changeSubmitBtn("Submit");
+     
+  },[newUser])
+
+ 
+    
+
+
+ 
   return (
     <AppBar position="static" style={{ boxShadow: "none" }}>
       <Toolbar className="app-bar">
@@ -117,6 +138,7 @@ export default function ButtonAppBar() {
       <Dialog open={open} onClose={hundleClickClose}>
         <DialogTitle style={{ textAlign: "center", fontWeight: "Bold" }}>
           Add user
+          {warning}
         </DialogTitle>
         <DialogContent>
           <form onSubmit={handleSubmit}>
@@ -221,10 +243,11 @@ export default function ButtonAppBar() {
               <Button
                 variant="contained"
                 color="primary"
-                onClick={hundleClickClose}
+                onClick={hundleSubmitBtn}
+                
                 type="submit"
               >
-                Submit
+                {submitBtn}
               </Button>
             </DialogActions>
           </form>
