@@ -24,7 +24,8 @@ export default function ButtonAppBar() {
   const newUser = useSelector((state) => state.new.user);
   const [submitBtn, changeSubmitBtn] = useState("Submit");
   const [warning, changeWarning] = useState("");
-  const [disabled, disableSubmit] = useState(false)
+  const [disabled, disableSubmit] = useState(false);
+  const [isSubmited, formSubmited] = useState(true);
   const dispatch = useDispatch();
   let Location = useLocation();
   const [title, setTitle] = useState("");
@@ -100,6 +101,8 @@ export default function ButtonAppBar() {
     setOpen(true);
   };
 
+
+
   const hundleClickClose = () => {
     setOpen(false);
   };
@@ -110,10 +113,16 @@ export default function ButtonAppBar() {
 
   };
 
+  
+    
+ 
+
   useEffect(()=> {
-    if (newUser.length === 0) 
-    changeWarning("sorry")
-     
+    if (newUser && newUser.length === 0) 
+    changeWarning("");
+    
+    else if (newUser.length === 0 && isSubmited)
+    changeWarning("sorry");
      else
      {
       changeSubmitBtn("Submited");
@@ -146,7 +155,7 @@ export default function ButtonAppBar() {
       <Dialog open={open} onClose={hundleClickClose}>
         <DialogTitle style={{ textAlign: "center", fontWeight: "Bold" }}>
           Add user
-          {warning}
+          <div>{warning}</div>
         </DialogTitle>
         <DialogContent>
           <form onSubmit={handleSubmit}>
@@ -251,10 +260,11 @@ export default function ButtonAppBar() {
               <Button
                 variant="contained"
                 color="primary"
-                onClick={hundleSubmitBtn}
+                onClick={hundleSubmitBtn }
                 
                 type="submit"
                 disabled={disabled}
+                
               >
                 {submitBtn}
               </Button>
