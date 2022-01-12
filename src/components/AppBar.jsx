@@ -24,6 +24,7 @@ export default function ButtonAppBar() {
   const newUser = useSelector((state) => state.new.user);
   const [submitBtn, changeSubmitBtn] = useState("Submit");
   const [warning, changeWarning] = useState("");
+  const [disabled, disableSubmit] = useState(false)
   const dispatch = useDispatch();
   let Location = useLocation();
   const [title, setTitle] = useState("");
@@ -110,8 +111,15 @@ export default function ButtonAppBar() {
   };
 
   useEffect(()=> {
-    if (newUser) 
-     changeSubmitBtn("Submit");
+    if (newUser.length === 0) 
+    changeWarning("sorry")
+     
+     else
+     {
+      changeSubmitBtn("Submited");
+      disableSubmit(true)
+     }
+    
      
   },[newUser])
 
@@ -246,6 +254,7 @@ export default function ButtonAppBar() {
                 onClick={hundleSubmitBtn}
                 
                 type="submit"
+                disabled={disabled}
               >
                 {submitBtn}
               </Button>
