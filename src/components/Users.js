@@ -50,7 +50,7 @@ const Users = () => {
     setTimeout(() => {
       setCounter(counter + 1);
     }, 15000);
-  }, [1000]);
+  }, []);
   console.log("==============counter is=============", counter);
   console.log("========error is=========", error);
   const Row = (props) => {

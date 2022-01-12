@@ -24,8 +24,9 @@ export default function ButtonAppBar() {
   const newUser = useSelector((state) => state.new.user);
   const [submitBtn, changeSubmitBtn] = useState("Submit");
   const [warning, changeWarning] = useState("");
+   const [counter, setCounter] = useState(0);
   const [disabled, disableSubmit] = useState(false);
-  const [isSubmited, formSubmited] = useState(true);
+  const [isSubmited, formSubmited] = useState(false);
   const dispatch = useDispatch();
   let Location = useLocation();
   const [title, setTitle] = useState("");
@@ -118,11 +119,15 @@ export default function ButtonAppBar() {
  
 
   useEffect(()=> {
-    if (newUser && newUser.length === 0) 
+    const interval = setInterval(() => {
+      setCounter(counter + 1);
+    }, 1000);
+
+    if (newUser.length === 0) 
     changeWarning("");
     
-    else if (newUser.length === 0 && isSubmited)
-    changeWarning("sorry");
+    else if (newUser.length === 0 &&  counter === 5)
+    changeWarning("User was not added");
      else
      {
       changeSubmitBtn("Submited");
@@ -132,7 +137,7 @@ export default function ButtonAppBar() {
      
   },[newUser])
 
- 
+  
     
 
 
