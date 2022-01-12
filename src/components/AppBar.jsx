@@ -88,12 +88,7 @@ export default function ButtonAppBar() {
     event.preventDefault();
     console.log("list==========================",state);
     dispatch(addUserAction(state));
-    // const { id, value} = event.target;
-    // setState(prevState => ({
-    //   ...prevState,
-    //   [id]: "",
-    // }));
-    
+   
 
     
   };
@@ -259,7 +254,7 @@ export default function ButtonAppBar() {
                 color="success"
                 variant="contained"
               >
-                cancel
+                {newUser && newUser.length === 0 ? "Cancel" : "Close"}
               </Button>
 
               <Button
