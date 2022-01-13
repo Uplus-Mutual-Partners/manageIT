@@ -1,4 +1,4 @@
-import { VIEW_USERS, ERROR_HUNDLING, DELETE_USER } from "./userTypes";
+import { VIEW_USERS, ERROR_HUNDLING, DELETE_USER, ADD_USER } from "./userTypes";
 
 import apiCall from "../../helpers/apiCall";
 
@@ -14,6 +14,23 @@ export const viewUsersAction = () => async (dispatch) => {
       type: ERROR_HUNDLING,
     });
   }
+};
+
+export const addUserAction = (formData) => {
+  return (dispatch) => {
+    apiCall
+      .post("/users", formData )
+      .then((res) => {
+        console.log("201: user created", res.data);
+        dispatch({
+          type: ADD_USER,
+          payload: res.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 };
 
 export const deleteUser = (id) => {

@@ -58,3 +58,9 @@
 .title-row {
   border-bottom: 2px solid gray;
 }
+
+.formButtons {
+  margin-right: 30%;
+  margin-top: 20px;
+}
+
