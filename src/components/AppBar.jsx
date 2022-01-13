@@ -21,7 +21,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 export default function ButtonAppBar() {
   const users = useSelector((state) => state.users.userInfo);
-  const newUser = useSelector((state) => state.new.user);
+  let newUser = useSelector((state) => state.new.user);
+  const [cancel, changeCancel] = useState("Cancel");
   const [submitBtn, changeSubmitBtn] = useState("Submit");
   const [warning, changeWarning] = useState("");
    const [counter, setCounter] = useState(0);
@@ -95,6 +96,12 @@ export default function ButtonAppBar() {
 
   const hundleClickOpen = () => {
     setOpen(true);
+    setState("")
+    
+    changeCancel("Cancel");
+    changeSubmitBtn("Submit");
+    disableSubmit(false);
+    console.log("....................+++++++++>>>>>>>>>", newUser.length)
   };
 
 
