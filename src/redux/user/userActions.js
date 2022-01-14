@@ -51,7 +51,7 @@ export const deleteUserAction = (id) => {
   };
 };
 
-export const EditUserAction = (formData, id) => {
+export const editUserAction = (formData, id) => {
   return (dispatch) => {
     apiCall
     .put(`/users/${id}`, formData)
@@ -59,7 +59,7 @@ export const EditUserAction = (formData, id) => {
       console.log("=====user deleted====",res.data);
       dispatch({
         type: EDIT_USER,
-        id: id,
+        user: id,
         payload: formData
       });
     })

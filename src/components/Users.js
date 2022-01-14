@@ -23,12 +23,24 @@ import MuiAlert from "@mui/material/Alert";
 import CustomizedSnackbars from "./Snack";
 import PersonIcon from "@mui/icons-material/Person";
 import { deleteUserAction } from "../redux/user/userActions";
-
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import { Input, FormControl } from "@mui/material";
+import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
+import { editUserAction } from "../redux/user/userActions";
 const Users = () => {
   const [error, setError] = useState([]);
   const users = useSelector((state) => state.users.userInfo);
   const [counter, setCounter] = useState(0);
+  const [openi, setFormOpen] = useState(false);
+  const [submitBtn, changeSubmitBtn] = useState("Submit");
+  const [disabled, disableSubmit] = useState(false);
+  const [warning, changeWarning] = useState("");
   console.log("_______________UserInformation________", users);
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -46,6 +58,54 @@ const Users = () => {
       }
     }
   }, [users]);
+
+  const [state, setState] = React.useState({
+    name: "",
+    username: "",
+    street: "",
+    suite: "",
+    city: "",
+    zipcode: "",
+    lat: "",
+    lng: "",
+  });
+
+  const handleChange = (event) => {
+    const { id, value} = event.target;
+    setState((prevState) => ({
+      ...prevState,
+      [id]: value
+    }));
+    
+  };
+
+  const handleSubmit = (event) => {
+    const { id, value} = event.target;
+    event.preventDefault();
+    console.log("list==========================",state);
+    dispatch(editUserAction(id));
+   
+
+    
+  };
+
+  const hundleClickOpen = () => {
+    setFormOpen(true);
+    
+  };
+
+
+
+  const hundleClickClose = () => {
+    setFormOpen(false);
+  };
+
+  const hundleSubmitBtn = () => {
+   
+    {changeSubmitBtn("Submit")} 
+
+  };
+
 
   useEffect(() => {
     setTimeout(() => {
@@ -82,7 +142,7 @@ const Users = () => {
 
           <TableCell align="left">{row?.website}</TableCell>
           <TableCell align="left" sx={{ color: "gray" }}>
-            <EditIcon />
+            <EditIcon onClick={()=>setFormOpen(true)}/>
             <DeleteIcon onClick={()=>dispatch(deleteUserAction(id))}/>
           </TableCell >
         </TableRow>
@@ -266,6 +326,126 @@ const Users = () => {
               console.log("ROW", row);
               return <Row id={row?.id} row={row} />;
             })}
+             <Dialog open={openi} onClose={hundleClickClose}>
+        <DialogTitle style={{ textAlign: "center", fontWeight: "Bold" }}>
+          Update User info
+          <div>{warning}</div>
+        </DialogTitle>
+        <DialogContent>
+          <form onSubmit={handleSubmit}>
+            <FormControl className="formButtons">
+              <label for="name">Name:</label>
+
+              <TextField
+                
+                onChange={handleChange}
+                authoFocus
+                id="name"
+              />
+            </FormControl >
+           
+            <FormControl  sx={{ marginLeft: 3}}>
+              <label for="username" >Username:</label>
+
+              <TextField
+                
+                onChange={handleChange}
+                authoFocus
+                id="username"
+              />
+            </FormControl>
+            <br />
+
+            <FormControl>
+              <label for="street">Street:</label>
+
+              <TextField
+                
+                onChange={handleChange}
+                authoFocus
+                id="street"
+              />
+            </FormControl>
+            
+            <FormControl sx={{ marginLeft: 3}}>
+              <label for="suite">Suite:</label>
+
+              <TextField
+              
+                onChange={handleChange}
+                authoFocus
+                id="suite"
+              />
+            </FormControl>
+            <br />
+            <FormControl>
+              <label for="city">city:</label>
+
+              <TextField
+               
+                onChange={handleChange}
+                authoFocus
+                id="city"
+              />
+            </FormControl>
+           
+            <FormControl sx={{ marginLeft: 3}}>
+              <label for="zipcode">zipcode</label>
+
+              <TextField
+         
+                onChange={handleChange}
+                authoFocus
+                id="zipcode"
+              />
+            </FormControl>
+            <br />
+            <FormControl>
+              <label for="lat">Lat:</label>
+
+              <TextField
+              
+                onChange={handleChange}
+                authoFocus
+                id="lat"
+              />
+            </FormControl>
+            
+            <FormControl sx={{ marginLeft: 3}}>
+              <label for="lng">Lng:</label>
+
+              <TextField
+               
+                onChange={handleChange}
+                authoFocus
+                id="lng"
+              />
+            </FormControl>
+
+            <DialogActions className="formButtons">
+              <Button
+                onClick={hundleClickClose}
+                color="success"
+                variant="contained"
+              >
+                {"cancel"}
+              </Button>
+
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={hundleSubmitBtn }
+                
+                type="submit"
+                disabled={disabled}
+                
+              >
+                {submitBtn}
+              </Button>
+            </DialogActions>
+          </form>
+        </DialogContent>
+      </Dialog>
           </TableBody>
         </Table>
       )}
