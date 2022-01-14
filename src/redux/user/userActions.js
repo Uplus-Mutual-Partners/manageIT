@@ -33,9 +33,20 @@ export const addUserAction = (formData) => {
   };
 };
 
-export const deleteUser = (id) => {
-  return {
-    type: DELETE_USER,
-    payload: id,
+export const deleteUserAction = (id) => {
+  return (dispatch) => {
+    apiCall
+    .delete(`/users/${id}`)
+    .then((res)=> {
+      console.log("=====user deleted====",res.data);
+      dispatch({
+        type: DELETE_USER,
+        payload: id,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+    
   };
 };

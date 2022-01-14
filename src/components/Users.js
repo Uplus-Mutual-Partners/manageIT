@@ -22,6 +22,7 @@ import { useSelector, useDispatch } from "react-redux";
 import MuiAlert from "@mui/material/Alert";
 import CustomizedSnackbars from "./Snack";
 import PersonIcon from "@mui/icons-material/Person";
+import { deleteUserAction } from "../redux/user/userActions";
 
 import Divider from "@mui/material/Divider";
 const Users = () => {
@@ -82,7 +83,7 @@ const Users = () => {
           <TableCell align="left">{row?.website}</TableCell>
           <TableCell align="left" sx={{ color: "gray" }}>
             <EditIcon />
-            <DeleteIcon onClick={()=>alert("User deleted")}/>
+            <DeleteIcon onClick={()=>dispatch(deleteUserAction(id))}/>
           </TableCell >
         </TableRow>
 
@@ -260,10 +261,7 @@ const Users = () => {
           </TableHead>
 
           <TableBody>
-            {/* {rows.map((row) => (
-              <Row key={row?.id} row={row} />
-            ))} */}
-
+        
             {rows.map((row) => {
               console.log("ROW", row);
               return <Row id={row?.id} row={row} />;
