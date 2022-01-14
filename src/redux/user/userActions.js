@@ -33,7 +33,7 @@ export const addUserAction = (formData) => {
   };
 };
 
-export const deleteUser = (id) => {
+export const deleteUserAction = (id) => {
   return {
     type: DELETE_USER,
     payload: id,

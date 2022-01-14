@@ -11,19 +11,16 @@ const viewUsersReducer = (state = initialState, action) => {
         ...state,
         userInfo: action.payload,
       };
+      case DELETE_USER:
+            return {
+             ...state,
+             userInfo: state.userInfo.filter((user) => user.id !== action.payload)
+            };
    
     default:
       return state;
   }
 };
 
-const deleteUserReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case DELETE_USER:
-      return {
-        ...state, userInfo: state.userInfo.splice(action.payload, 1)
-      };
-  }
-};
 
 export default viewUsersReducer;
