@@ -261,10 +261,7 @@ const Users = () => {
           </TableHead>
 
           <TableBody>
-            {/* {rows.map((row) => (
-              <Row key={row?.id} row={row} />
-            ))} */}
-
+        
             {rows.map((row) => {
               console.log("ROW", row);
               return <Row id={row?.id} row={row} />;
