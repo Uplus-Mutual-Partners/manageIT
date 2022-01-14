@@ -1,4 +1,4 @@
-import { VIEW_USERS, ERROR_HUNDLING, DELETE_USER, ADD_USER } from "./userTypes";
+import { VIEW_USERS, ERROR_HUNDLING, DELETE_USER, ADD_USER, EDIT_USER } from "./userTypes";
 
 import apiCall from "../../helpers/apiCall";
 
@@ -42,6 +42,25 @@ export const deleteUserAction = (id) => {
       dispatch({
         type: DELETE_USER,
         payload: id,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+    
+  };
+};
+
+export const EditUserAction = (formData, id) => {
+  return (dispatch) => {
+    apiCall
+    .put(`/users/${id}`, formData)
+    .then((res)=> {
+      console.log("=====user deleted====",res.data);
+      dispatch({
+        type: EDIT_USER,
+        id: id,
+        payload: formData
       });
     })
     .catch((error) => {
